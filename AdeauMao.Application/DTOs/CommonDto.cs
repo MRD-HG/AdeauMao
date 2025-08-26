@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace AdeauMao.Application.DTOs
 {
     public class PagedResultDto<T>

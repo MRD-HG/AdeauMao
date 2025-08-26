@@ -38,7 +38,7 @@ namespace AdeauMao.Infrastructure.Repositories
         private IRepository<Declencheur>? _declencheurs;
         private IRepository<Competence>? _competences;
         private IRepository<EmployeCompetence>? _employeCompetences;
-        private IRepository<StatutEmploye>? _statutsEmploye;
+        private IRepository<HistoriqueStatutEmploye>? _statutsEmploye;
         private IRepository<Workflow>? _workflows;
         private IRepository<EtapeWorkflow>? _etapesWorkflow;
         private IRepository<HistoriqueWorkflow>? _historiqueWorkflows;
@@ -131,8 +131,8 @@ namespace AdeauMao.Infrastructure.Repositories
         public IRepository<EmployeCompetence> EmployeCompetences =>
             _employeCompetences ??= new Repository<EmployeCompetence>(_context);
 
-        public IRepository<StatutEmploye> StatutsEmploye =>
-            _statutsEmploye ??= new Repository<StatutEmploye>(_context);
+        public IRepository<HistoriqueStatutEmploye> StatutsEmploye =>
+            _statutsEmploye ??= new Repository<HistoriqueStatutEmploye>(_context);
 
         public IRepository<Workflow> Workflows =>
             _workflows ??= new Repository<Workflow>(_context);

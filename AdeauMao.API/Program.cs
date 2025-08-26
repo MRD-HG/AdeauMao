@@ -15,6 +15,10 @@ using AdeauMao.API.Extensions;
 using FluentValidation;
 using FluentValidation.AspNetCore;
 using AdeauMao.Application.Validators;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -104,11 +108,19 @@ builder.Services.AddValidatorsFromAssemblyContaining<UtilisateurValidator>();
 builder.Services.AddApiVersioning(options =>
 {
     options.AssumeDefaultVersionWhenUnspecified = true;
-    options.DefaultApiVersion = new Microsoft.AspNetCore.Mvc.ApiVersion(1, 0);
-    options.ApiVersionReader = Microsoft.AspNetCore.Mvc.ApiVersioning.ApiVersionReader.Combine(
-        new Microsoft.AspNetCore.Mvc.ApiVersioning.QueryStringApiVersionReader("version"),
-        new Microsoft.AspNetCore.Mvc.ApiVersioning.HeaderApiVersionReader("X-Version")
+    options.DefaultApiVersion = new ApiVersion(1, 0);
+    options.ReportApiVersions = true; // helpful for clients
+    options.ApiVersionReader = ApiVersionReader.Combine(
+        new QueryStringApiVersionReader("version"),
+        new HeaderApiVersionReader("X-Version")
     );
+});
+
+// For Swagger grouping
+builder.Services.AddVersionedApiExplorer(options =>
+{
+    options.GroupNameFormat = "'v'VVV";
+    options.SubstituteApiVersionInUrl = true;
 });
 
 // Health Checks

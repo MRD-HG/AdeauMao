@@ -31,7 +31,7 @@ namespace AdeauMao.Core.Interfaces
         IRepository<Declencheur> Declencheurs { get; }
         IRepository<Competence> Competences { get; }
         IRepository<EmployeCompetence> EmployeCompetences { get; }
-        IRepository<StatutEmploye> StatutsEmploye { get; }
+        IRepository<HistoriqueStatutEmploye> StatutsEmploye { get; }
         IRepository<Workflow> Workflows { get; }
         IRepository<EtapeWorkflow> EtapesWorkflow { get; }
         IRepository<HistoriqueWorkflow> HistoriqueWorkflows { get; }

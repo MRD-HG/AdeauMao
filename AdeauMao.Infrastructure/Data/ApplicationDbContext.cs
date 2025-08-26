@@ -39,7 +39,7 @@ namespace AdeauMao.Infrastructure.Data
         public DbSet<Declencheur> Declencheurs { get; set; }
         public DbSet<Competence> Competences { get; set; }
         public DbSet<EmployeCompetence> EmployeCompetences { get; set; }
-        public DbSet<StatutEmploye> StatutsEmploye { get; set; }
+        public DbSet<HistoriqueStatutEmploye> StatutsEmploye { get; set; }
         public DbSet<Workflow> Workflows { get; set; }
         public DbSet<EtapeWorkflow> EtapesWorkflow { get; set; }
         public DbSet<HistoriqueWorkflow> HistoriqueWorkflows { get; set; }
@@ -94,10 +94,10 @@ namespace AdeauMao.Infrastructure.Data
                 .HasForeignKey(ec => ec.CompetenceId);
 
             // StatutEmploye - Composite Key
-            modelBuilder.Entity<StatutEmploye>()
+            modelBuilder.Entity<HistoriqueStatutEmploye>()
                 .HasKey(se => new { se.EmployeId, se.DateStatut });
 
-            modelBuilder.Entity<StatutEmploye>()
+            modelBuilder.Entity<HistoriqueStatutEmploye>()
                 .HasOne(se => se.Employe)
                 .WithMany(e => e.StatutsEmploye)
                 .HasForeignKey(se => se.EmployeId);
@@ -384,7 +384,7 @@ namespace AdeauMao.Infrastructure.Data
                 .Property(d => d.TypeDeclencheur)
                 .HasConversion<string>();
 
-            modelBuilder.Entity<StatutEmploye>()
+            modelBuilder.Entity<HistoriqueStatutEmploye>()
                 .Property(se => se.Statut)
                 .HasConversion<string>();
 

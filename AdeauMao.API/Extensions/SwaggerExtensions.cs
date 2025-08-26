@@ -1,5 +1,9 @@
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using Swashbuckle.AspNetCore.SwaggerGen;
+using AdeauMao.Application.DTOs;
+using System;
+
 
 namespace AdeauMao.API.Extensions
 {
@@ -125,7 +129,9 @@ namespace AdeauMao.API.Extensions
         {
             var apiDescription = context.ApiDescription;
 
-            operation.Deprecated |= apiDescription.IsDeprecated();
+            operation.Deprecated |= apiDescription.ActionDescriptor.EndpointMetadata
+                .OfType<ObsoleteAttribute>()
+                .Any();
 
             foreach (var responseType in context.ApiDescription.SupportedResponseTypes)
             {
